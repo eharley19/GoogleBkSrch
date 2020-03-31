@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import Search from './Search';
 
 class Book extends Component {
-    state = {
-        
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+      searchInput: ''
+    }
+  }
+    
+  handleSearch = (e) => {
+    
+    this.setState({ searchInput: e.target.value})
+  }
     render() { 
-        return (  );
+      return ( 
+          <Search handleSearch={this.handleSearch} />
+      );
     }
 }
  
