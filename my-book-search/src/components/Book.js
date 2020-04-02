@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from './Search';
 import axios from 'axios';
+import Bookshelf from './Bookshelf';
 
 class Book extends Component {
   constructor(props) {
@@ -13,17 +14,25 @@ class Book extends Component {
   searchBooks = (event) => {
     event.preventDefault();
     axios.get(`https://www.googleapis.com/books/v1/volumes?q=${this.searchInput}`).then((data) => {
-      console.log(data);
+      // console.log(data);
+      this.setState({ books: [...data.data.items] });
     }).catch((error) => console.log(error))
   }
     
   handleSearch = (event) => {
-    this.setState({ searchInput: event.target.value})
+    
+    event.preventDefault();
+    const value = document.querySelector('.searchText').value;
+    console.log(value);
+    this.setState({ searchInput: value })
   }
   render() { 
     return ( 
-      <Search searchBooks={this.searchBooks} handleSearch={this.handleSearch} />
-    );
+      <React.Fragment>
+        <Search searchBooks={this.searchBooks} handleSearch={this.handleSearch} />
+        <Bookshelf books={this.state.books} />
+      </React.Fragment>
+    )
   }
 }
  

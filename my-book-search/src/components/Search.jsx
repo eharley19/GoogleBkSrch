@@ -4,7 +4,7 @@ const Search = (props) => {
     return (
         <div className="search-field">
             <form onSubmit={props.searchBooks} action="GET">
-                <input type="text" onChange={props.handleSearch}/><button>Submit</button>
+                <input className="searchText" type="text" /><button onClick={props.handleSearch}>Submit</button>
             </form>
         </div>
     )
